@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-
+import userPhoto from '../../assets/user.png'
 import { GiRunningNinja } from "react-icons/gi";
 
 const Navbar = () => {
@@ -46,8 +46,9 @@ const Navbar = () => {
 
                     </ul>
                 </div>
+               
                 <div className="navbar-end gap-3">
-                    <img src="" alt="" />
+                    <img src={userPhoto} alt="userPhoto" />
                     <p className="btn border-2 border-purple-300 hover:bg-purple-200 bg-white text-sm lg:text-lg fira-sans-extralight">LOG IN</p>
                     <p className="btn border-2 border-pink-300 hover:bg-pink-200 bg-white lg:text-lg md:text-xs fira-sans-extralight">SIGN UP</p>
 
