@@ -7,7 +7,7 @@ import photo5 from '../assets/p-5.jpg'
 
 const Slider = () => {
   return (
-    <div className="w-full mx-auto">
+    <div className="w-full mx-auto ">
       <div className="carousel w-full h-[400px] md:h-[700px] rounded-lg overflow-hidden">
 
         {/* Slide 1 */}
@@ -18,8 +18,8 @@ const Slider = () => {
             alt="Marathon Start"
           />
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
-            <h2 className="text-3xl text-black md:text-4xl font-bold">Welcome to RaceClock</h2>
-            <p className="mt-2 text-sm md:text-lg  text-black ">Your Ultimate Marathon Management Hub</p>
+            <h2 className="text-3xl text-black md:text-4xl font-bold edu-nsw-act-cursive-font">Welcome to RaceClock</h2>
+            <p className="mt-2 text-sm md:text-lg  text-black fira-sans-extralight ">Your Ultimate Marathon Management Hub</p>
             <button className="mt-4 bg-purple-500 hover:bg-purple-700 text-white px-4 py-2 rounded-md">
               Get Started
             </button>

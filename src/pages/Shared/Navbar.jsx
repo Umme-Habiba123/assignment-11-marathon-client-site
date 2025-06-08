@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { use } from 'react';
 import { Link, NavLink } from 'react-router';
 import userPhoto from '../../assets/user.png'
 import { GiRunningNinja } from "react-icons/gi";
+import { AuthContext } from '../../context/AuthContext/AuthContext';
 
 const Navbar = () => {
+
+    const {signOutUser}=use(AuthContext)
+
+      const handleSignOut=()=>{
+        signOutUser()
+        .then(()=>{
+            console.log('sign out')
+        }).catch(error=>{
+            console.log(error)
+        })
+    }
+
+
+    const {user}=use(AuthContext)
+
     const links = <>
         <Link to={'/'}><li><p>HOME.</p></li> </Link>
 
@@ -48,14 +64,22 @@ const Navbar = () => {
                 </div>
                
                 <div className="navbar-end gap-3">
-                    <img src={userPhoto} alt="userPhoto" />
-                   <NavLink to={'/logIn'}>
-                     <p className="btn border-2 border-purple-300 hover:bg-purple-200 bg-white text-sm lg:text-lg fira-sans-extralight">LOG IN</p>
+                   <img src={userPhoto} alt="" />
+                  {
+                    user?  <NavLink to={'logIn'}>
+                     <button onClick={handleSignOut} className="btn border-2 border-purple-300 hover:bg-purple-200 bg-white text-sm lg:text-lg fira-sans-extralight">LOG OUT</button>
+                   </NavLink>:
+                   <>
+                    <NavLink to={'logIn'}>
+                     <button className="btn border-2 border-purple-300 hover:bg-purple-200 bg-white text-sm lg:text-lg fira-sans-extralight">LOG IN</button>
                    </NavLink>
 
-                    <NavLink to={'/register'}>
-                        <p className="btn border-2 border-pink-300 hover:bg-pink-200 bg-white lg:text-lg md:text-xs fira-sans-extralight">Registration</p>
+                    <NavLink to={'register'}>
+                        <button className="btn border-2 border-pink-300 hover:bg-pink-200 bg-white lg:text-lg md:text-xs fira-sans-extralight">Registration</button>
                     </NavLink>
+                   </>
+
+                  }
 
                 </div>
 
