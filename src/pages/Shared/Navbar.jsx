@@ -6,15 +6,15 @@ import { AuthContext } from '../../context/AuthContext/AuthContext';
 
 const Navbar = () => {
 
-    const {signOutUser}=use(AuthContext)
 
+    const {signOutUser}=use(AuthContext)
       const handleSignOut=()=>{
         signOutUser()
         .then(()=>{
             console.log('sign out')
         }).catch(error=>{
             console.log(error)
-        })
+        })   
     }
 
 

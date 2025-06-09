@@ -7,6 +7,8 @@ import {auth} from '../../firebase/firebase.init'
 const AuthProvider = ({children}) => {
     const [user,setUser]=useState(null)
     const [loading,setLoading]=useState(true)
+    const [password, setPassword]=useState('')
+    const [showPassword, setShowPassword]=useState(null)
 
     // create user------
     const createUser=(email,password)=>{
@@ -46,6 +48,10 @@ const AuthProvider = ({children}) => {
       user,
       setUser,
       signOutUser,
+      password,
+      setPassword,
+      setShowPassword,
+      showPassword,
 
     }
     return (
