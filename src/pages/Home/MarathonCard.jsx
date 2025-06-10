@@ -31,7 +31,7 @@ const MarathonCard = ({ marathon }) => {
                         <h1 className="text-lg text-green-700 font-bold edu-nsw-act-cursive-font">Running</h1>
                         
                         <div>
-                            <Link to={'cardDetails'}>
+                            <Link to={`/marathonCardDetails/${_id}`}>
                                <button className="btn bg-black text-white hover:bg-purple-200 hover:text-black">See Details.</button>
                             </Link>
                         </div>

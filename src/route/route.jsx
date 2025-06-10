@@ -5,12 +5,15 @@ import RootLayout from "../layouts/RootLayout";
 import Home from "../pages/Home/Home";
 import Register from "../pages/register/Register";
 import LogIn from "../pages/logIn/LogIn";
-import CardDetails from "../pages/Home/CardDetails";
+import MarathonCardDetails from "../pages/cardDetails/MarathonCardDetails";
+import ErrorPage from "../pages/errorPage/ErrorPage";
+import AddMarathon from "../pages/marathonPages/AddMarathon";
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayout,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
         {
           index: true,
@@ -25,8 +28,13 @@ const router = createBrowserRouter([
           Component:LogIn
         },
         {
-          path:'cardDetails/:id',
-          Component: CardDetails
+          path:'/marathonCardDetails/:id',
+          Component: MarathonCardDetails,
+          loader: ({params})=>fetch(`http://localhost:5000/marathonData/${params.id}`)
+        },
+        {
+          path: 'addMarathon',
+          element:<AddMarathon></AddMarathon>
         }
     ]
   },

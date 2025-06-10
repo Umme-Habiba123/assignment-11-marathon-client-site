@@ -5,7 +5,7 @@ const UpMarathonCard = ({upcomingMarathon}) => {
     const {image,title,location,eventDate,description,trainer,price}=upcomingMarathon
 
     return (
-        <div>
+        <div className=''>
    <div className="card bg-base-100 w-96 shadow-lg hover:shadow-pink-300 fira-sans-extralight">
   <figure className="px-10 pt-10">
     <img
@@ -14,21 +14,21 @@ const UpMarathonCard = ({upcomingMarathon}) => {
       className="rounded-xl h-60" />
   </figure>
   <div className="card-body items-center text-center">
-    <h2 className="card-title text-2xl font-bold  edu-nsw-act-cursive-font">{title}</h2>
+    <h2 className="card-title lg:text-2xl text-xl font-bold  edu-nsw-act-cursive-font">{title}</h2>
 
-    <p className='text-gray-500 text-lg font-semibold'>{description}</p>
+    <p className='text-gray-500 text-sm lg:text-lg font-semibold'>{description}</p>
 
-    <p className='font-bold text-xl'>Location : <span className=' text-lg text-gray-600'> {location}</span>
+    <p className='font-bold text-sm lg:text-xl'>Location : <span className=' text-sm lg:text-lg text-gray-600'> {location}</span>
     </p>
     
-    <p className='font-bold text-xl'>Trainer : <span className=' text-lg text-gray-600 '> {trainer}</span>
+    <p className='font-bold text-sm lg:text-xl'>Trainer : <span className=' text-sm lg:text-lg text-gray-600 '> {trainer}</span>
     </p>
 
 
-    <p className='font-bold text-xl'>Event Date : <span className=' text-lg text-gray-600'> {eventDate}</span>
+    <p className='font-bold text-sm lg:text-xl'>Event Date : <span className=' text-sm lg:text-lg text-gray-600'> {eventDate}</span>
     </p>
 
-    <p className='font-bold text-xl'>From : <span className=' text-lg text-gray-600'> {price}</span>
+    <p className='font-bold text-sm lg:text-xl'>From : <span className=' text-sm lg:text-lg text-gray-600'> {price}</span>
     </p>
 
 

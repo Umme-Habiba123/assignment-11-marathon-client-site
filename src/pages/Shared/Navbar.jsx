@@ -26,7 +26,7 @@ const Navbar = () => {
         <Link to={'/addTasks'}><li><p>MARATHONS.</p></li> </Link>
         <Link to={'/brouseTasks'}><li><p>DASSHBOARD.</p></li> </Link>
 
-        <Link to={'/brouseTasks'}><li><p>ADD MARATHON.</p></li> </Link>
+        <Link to={'/addMarathon'}><li><p>ADD MARATHON.</p></li> </Link>
 
         <Link to={'/myPostedTasks'}><li><p>My MARATHON. LIST</p></li> </Link>
 
@@ -56,7 +56,7 @@ const Navbar = () => {
 
                 </div>
                 <div className="navbar-center hidden lg:flex dancing-script-font">
-                    <ul className="menu menu-horizontal px-1 lg:text-lg text-gray-500 poppins-extralight md:text-xs text-xs">
+                    <ul className="menu menu-horizontal px-1 lg:text-sm text-gray-500 poppins-extralight md:text-xs text-xs">
 
                         {links}
 
