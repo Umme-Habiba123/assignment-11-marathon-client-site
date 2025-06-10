@@ -1,12 +1,14 @@
 import { IoLocationSharp } from "react-icons/io5";
 import { SlCalender } from "react-icons/sl";
+import { Link } from "react-router";
 
 const MarathonCard = ({ marathon }) => {
     const { image, location, registrationDates, title, _id,description  } = marathon
 
     return (
       
-        <div className=" w-80 shadow-lg hover:shadow-purple-400 fira-sans-extralight">
+         <div className=" w-80 shadow-lg hover:shadow-purple-400 fira-sans-extralight">
+            
             <figure>
               <img className="rounded-t-2xl"
                      src={image}
@@ -29,12 +31,15 @@ const MarathonCard = ({ marathon }) => {
                         <h1 className="text-lg text-green-700 font-bold edu-nsw-act-cursive-font">Running</h1>
                         
                         <div>
-                             <button className="btn bg-black text-white hover:bg-purple-200 hover:text-black">Join Now</button>
+                            <Link to={'cardDetails'}>
+                               <button className="btn bg-black text-white hover:bg-purple-200 hover:text-black">See Details.</button>
+                            </Link>
                         </div>
                   
                 </div>
             </div>
        
+      
     );
 };
 

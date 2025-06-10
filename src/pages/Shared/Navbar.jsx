@@ -51,7 +51,7 @@ const Navbar = () => {
                     </div>
 
                   <Link to={'/'}>
-                    <h1 style={{wordSpacing:'0', margin: 0}} className="edu-nsw-act-cursive-font btn btn-ghost text-3xl gap-0 "><GiRunningNinja size={40}/>Race<span className='text-purple-600 '>Clock</span></h1>
+                    <h1 style={{wordSpacing:'0', margin: 0}} className="edu-nsw-act-cursive-font btn btn-ghost lg:text-3xl gap-0 md:text-xl text-sm"><GiRunningNinja size={40}/>Race<span className='text-purple-600 '>Clock</span></h1>
                   </Link>
 
                 </div>
@@ -63,19 +63,19 @@ const Navbar = () => {
                     </ul>
                 </div>
                
-                <div className="navbar-end gap-3">
-                   <img src={userPhoto} alt="" />
+                <div className="navbar-end gap-2 lg:gap-6 md:gap-4">
+                   <img className='text-sm' src={userPhoto} alt="" />
                   {
                     user?  <NavLink to={'logIn'}>
-                     <button onClick={handleSignOut} className="btn border-2 border-purple-300 hover:bg-purple-200 bg-white text-sm lg:text-lg fira-sans-extralight">LOG OUT</button>
+                     <button onClick={handleSignOut} className="btn border-2 border-purple-300 hover:bg-purple-200 bg-white text-sm lg:text-lg sm:text-base  fira-sans-extralight sm:w-auto">LOG OUT</button>
                    </NavLink>:
                    <>
                     <NavLink to={'logIn'}>
-                     <button className="btn border-2 border-purple-300 hover:bg-purple-200 bg-white text-sm lg:text-lg fira-sans-extralight">LOG IN</button>
+                     <button className="btn border-2 border-purple-300 hover:bg-purple-200 bg-white text-sm lg:text-lg fira-sans-extralight sm:text-base px-4 py-2 sm:w-auto">LOG IN</button>
                    </NavLink>
 
                     <NavLink to={'register'}>
-                        <button className="btn border-2 border-pink-300 hover:bg-pink-200 bg-white lg:text-lg md:text-xs fira-sans-extralight">Registration</button>
+                        <button className="btn border-2 border-pink-300 hover:bg-pink-200 bg-white lg:text-lg md:text-xs fira-sans-extralight sm:text-base sm:w-auto">Registration</button>
                     </NavLink>
                    </>
 
