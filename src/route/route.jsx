@@ -8,6 +8,7 @@ import LogIn from "../pages/logIn/LogIn";
 import MarathonCardDetails from "../pages/cardDetails/MarathonCardDetails";
 import ErrorPage from "../pages/errorPage/ErrorPage";
 import AddMarathon from "../pages/marathonPages/AddMarathon";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,9 @@ const router = createBrowserRouter([
         },
         {
           path: 'addMarathon',
-          element:<AddMarathon></AddMarathon>
+          element:<PrivateRoute>
+            <AddMarathon></AddMarathon>
+          </PrivateRoute>
         }
     ]
   },

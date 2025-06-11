@@ -57,9 +57,8 @@ const Register = () => {
       return
     }
 
-
     //  createUser-----
-    createUser(email, password)
+    createUser(email, password,photoURL,name)
       .then(result => {
         Swal.fire({
           title: "Successfully Registered!",

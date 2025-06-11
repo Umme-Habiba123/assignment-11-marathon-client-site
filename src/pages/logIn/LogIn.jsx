@@ -10,7 +10,8 @@ import { LuEyeClosed } from "react-icons/lu";
 
 
 const LogIn = () => {
-    const { signInUser,showPassword,setShowPassword } = use(AuthContext)
+
+    const { signInUser,showPassword,setShowPassword,signInWithGoogle } = use(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -52,6 +53,16 @@ const LogIn = () => {
 
             })
     }
+
+      const handleGoogleSignIn=()=>{
+        signInWithGoogle()
+        .then(result=>{
+            console.log(result)
+            navigate(location?.state || '/')
+        }).catch(error=>{
+            console.log(error)
+        })
+    } 
 
 
     return (
@@ -117,7 +128,7 @@ const LogIn = () => {
 
                         <h1 className='text-center text-gray-400'>------ OR ------</h1>
 
-                        <button className='flex btn w-full text-gray-400 text-lg'><FcGoogle size={25} />Login with Facebook</button>
+                        <button onClick={handleGoogleSignIn} className='flex btn w-full text-gray-400 text-lg'><FcGoogle size={25} />Login with Facebook</button>
 
 
                 </form>

@@ -64,6 +64,8 @@ const Navbar = () => {
                 </div>
                
                 <div className="navbar-end gap-2 lg:gap-6 md:gap-4">
+                   <h1>{user?.email}</h1>
+                   <h1>{user?.displayName}</h1>
                    <img className='text-sm' src={userPhoto} alt="" />
                   {
                     user?  <NavLink to={'logIn'}>
