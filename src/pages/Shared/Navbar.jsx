@@ -23,14 +23,19 @@ const Navbar = () => {
     const links = <>
         <Link to={'/'}><li><p>HOME.</p></li> </Link>
 
-        <Link to={'/addTasks'}><li><p>MARATHONS.</p></li> </Link>
-        <Link to={'/brouseTasks'}><li><p>DASSHBOARD.</p></li> </Link>
+        <Link to={'/marathons'}><li><p>MARATHONS.</p></li> </Link>
+        {
+            user && <>
+              <Link to={'/dashBoard'}><li><p>DASHBOARD.</p></li> </Link>
 
         <Link to={'/addMarathon'}><li><p>ADD MARATHON.</p></li> </Link>
 
-        <Link to={'/myPostedTasks'}><li><p>My MARATHON. LIST</p></li> </Link>
+        <Link to={'/myMarathonsList'}><li><p>My MARATHONS LIST.</p></li> </Link>
 
-        <Link to={'/myPostedTasks'}><li><p>MY APPLY LIST.</p></li> </Link>
+        <Link to={'/myApplyList'}><li><p>MY APPLY LIST.</p></li> </Link>
+            </>
+        }
+      
     </>
     return (
         <div className='bg-[#f5edf8] px-15 py-5  w-12/12 mx-auto '>

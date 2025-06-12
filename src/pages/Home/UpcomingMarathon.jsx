@@ -11,7 +11,7 @@ const UpcomingMarathon = ({upcomingMarathonePromise}) => {
     console.log('upcoming promise',upcomingMarathonePromise )
 
     return (
-        <div className='max-w-7xl mx-auto mt-10 lg:mt-30 lg:mb-20 mb-10'>
+        <div className='w-8/12 mx-auto mt-10 lg:mt-30 lg:mb-20 mb-10'>
 
     <h1 className='text-4xl text-center text-gray-600 fira-sans-extralight mb-10'>Our Upcoming deals</h1>
 

@@ -3,11 +3,13 @@ import { AuthContext } from '../../context/AuthContext/AuthContext';
 import { Helmet } from "react-helmet";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 
 const AddMarathon = () => {
 
-    const { theme } = use(AuthContext)
+    const { theme, setLoading } = use(AuthContext)
     const [selected, setSelected] = useState('Select Category');
     const [startRegDate, setStartRegDate] = useState(null)
     const [endRegDate, setEndRedDate] = useState(null)
@@ -15,23 +17,41 @@ const AddMarathon = () => {
 
     const handleAddMarathon = e => {
         e.preventDefault()
-        const form=e.target
+        const form = e.target
 
-         const marathon={
-             title: form.title.value,
-            startRegistration: startRegDate,
-            endRegistration: endRegDate,
-            marathonDate: maratonsStartDate,
+        const marathon = {
+            title: form.title.value,
+            startRegistration: startRegDate.toISOString().split("T")[0],
+            endRegistration: endRegDate?.toISOString().split("T")[0],
+            marathonDate: maratonsStartDate?.toISOString().split("T")[0],
             location: form.location.value,
             distance: selected,
             description: form.description.value,
             image: form.marathonsImage.value,
-            createAt:new Date(),
-            totalRegCount:0
-          
-         }
-         console.log(marathon)
+            createAt: new Date(),
+            totalRegCount: 0
+        }
+        console.log(marathon)
+
+
+        axios.post('http://localhost:5000/marathons', marathon)
+            .then(res => {
+                setLoading(true)
+                console.log(res.data)
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Your Marathon has been Submitted",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+                setLoading(false)
+            }).catch(error => {
+                console.log(error)
+            })
     }
+
 
     const handleStartRegDate = (date) => {
         setStartRegDate(date)
@@ -57,7 +77,7 @@ const AddMarathon = () => {
                     </title>
                 </Helmet>
                 <div>
-                    <h1 className='tagesschrift-regular text-5xl text-center mt-20'>A Add Marathons </h1>
+                    <h1 className='tagesschrift-regular text-5xl text-center mt-20'>Add Marathons </h1>
                     <p className='text-gray-500 text-center mt-4 tagesschrift-regular '>Get what you need faster from freelancers who trained their own personal AI Creation Models. Now you can browse, prompt, and generate instantly. <br /> And if you need a tweak or change, the freelancer is always there to help you perfect it.</p>
                 </div>
                 <form onSubmit={handleAddMarathon} className="">
@@ -137,7 +157,7 @@ const AddMarathon = () => {
                                 onChange={handleStartRegDate}
                                 dateFormat="dd/MM/yyyy"
                                 className="w-full border text-gray-800 font-semibold border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300 p-3"
-                                 placeholderText="Select Start registration date"
+                                placeholderText="Select Start registration date"
                             >
                             </DatePicker>
                         </fieldset>
@@ -149,7 +169,7 @@ const AddMarathon = () => {
                                 onChange={handleEndRegDate} selectsEnd
                                 dateFormat="dd/MM/yyyy"
                                 className="w-full border text-gray-800 font-semibold border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300 p-3"
-                                 placeholderText="Select End registration date"
+                                placeholderText="Select End registration date"
                             />
                         </fieldset>
 
@@ -158,21 +178,21 @@ const AddMarathon = () => {
                             <label className="label">Marathon Start Date</label>
                             <DatePicker
                                 selected={maratonsStartDate}
-                                onChange={handleMarathonsStartDate} 
+                                onChange={handleMarathonsStartDate}
                                 dateFormat="dd/MM/yyyy"
                                 className="w-full border text-gray-800 font-semibold border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-300"
-                                 placeholderText="Select Marathon Start Date"
+                                placeholderText="Select Marathon Start Date"
                             />
                         </fieldset>
 
-                       
+
 
                         {/* Location-- */}
                         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
                             <label className="label">Location</label>
                             <input
                                 name="location"
-                                type="location"
+                                type="text"
                                 className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-300"
                                 min='0'
                                 placeholder='Location' />
@@ -186,9 +206,11 @@ const AddMarathon = () => {
                         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4 mb-5">
                             <label className="label">Marathons Image</label>
                             <input
-                               
+
                                 name="marathonsImage"
-                                type='photoURL'
+                                type='url'
+                                // type='file' 
+                                // accept="image/*"
                                 className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-300"
                                 placeholder="Marathons image"
                                 required

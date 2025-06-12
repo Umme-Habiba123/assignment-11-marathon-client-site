@@ -14,6 +14,7 @@ const LogIn = () => {
     const { signInUser,showPassword,setShowPassword,signInWithGoogle } = use(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
+    const formm=location.state || '/'
 
     const handleLogIn = e => {
         e.preventDefault()
@@ -30,7 +31,7 @@ const LogIn = () => {
                     icon: "success",
                     draggable: true
                 });
-                navigate(location?.state || '/')
+                navigate(formm)
                 console.log(result)
             }).catch(error => {
                 if (error.code === 'auth/wrong-password') {
@@ -58,7 +59,7 @@ const LogIn = () => {
         signInWithGoogle()
         .then(result=>{
             console.log(result)
-            navigate(location?.state || '/')
+            navigate(formm)
         }).catch(error=>{
             console.log(error)
         })
@@ -128,7 +129,7 @@ const LogIn = () => {
 
                         <h1 className='text-center text-gray-400'>------ OR ------</h1>
 
-                        <button onClick={handleGoogleSignIn} className='flex btn w-full text-gray-400 text-lg'><FcGoogle size={25} />Login with Facebook</button>
+                        <button type='button' onClick={handleGoogleSignIn} className='flex btn w-full text-gray-400 text-lg'><FcGoogle size={25} />Login with Facebook</button>
 
 
                 </form>

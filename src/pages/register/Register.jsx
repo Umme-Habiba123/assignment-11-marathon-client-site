@@ -148,7 +148,7 @@ const Register = () => {
 
         <h1 className='text-center text-gray-400'>------ OR ------</h1>
 
-        <button className='flex btn w-full text-gray-400 text-lg'><FcGoogle size={25} />Login with Facebook</button>
+        <button type='button' className='flex btn w-full text-gray-400 text-lg'><FcGoogle size={25} />Login with Facebook</button>
 
       </form>
 
