@@ -34,6 +34,7 @@ endRegistration}=marathon
   <button className="btn text-white shadow-2xl shadow-purple-400 bg-purple-400   border-purple-400 hover:bg-white hover:text-black">See Details</button>
   </Link>
     </div>
+   
   </div>
 </div>
         </div>

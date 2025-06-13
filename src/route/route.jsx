@@ -11,6 +11,8 @@ import AddMarathon from "../pages/marathonPages/AddMarathon";
 import PrivateRoute from "./PrivateRoute";
 import Marathons from "../pages/marathonPages/Marathons";
 import CardDetails from "../pages/marathonPages/CardDetails";
+import MarathonsRegistration from "../pages/marathonPages/MarathonsRegistration";
+import MyApplyList from "../pages/marathonPages/MyApplyList";
 
 const router = createBrowserRouter([
   {
@@ -56,7 +58,16 @@ const router = createBrowserRouter([
           </PrivateRoute>
         },
         {
+          path: 'marathonsRegistration/:id',
+           loader: ({ params }) => fetch(`http://localhost:5000/marathons/${params.id}`).then(res => res.json()),
+          element: <PrivateRoute><MarathonsRegistration></MarathonsRegistration></PrivateRoute>
 
+        },
+        {
+          path:'myApplyList',
+          element: <PrivateRoute>
+            <MyApplyList></MyApplyList>
+          </PrivateRoute>
         }
     ]
   },
