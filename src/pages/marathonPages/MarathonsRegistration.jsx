@@ -4,6 +4,7 @@ import { useLoaderData, useParams } from 'react-router';
 import { format } from "date-fns";
 
 
+
 const MarathonsRegistration = () => {
     const marathon=useLoaderData()
     console.log(marathon)
@@ -50,13 +51,13 @@ const MarathonsRegistration = () => {
 
 
     return (
-        <div className='w-8/12 mx-auto my-20'>
+        <div className='w-8/12 mx-auto my-20 bg-gray-100 p-20 rounded'>
             <p className='text-3xl mb-8 text-center edu-nsw-act-cursive-font font-bold'>Register Now for the Marathon!</p>
             <form
                 onSubmit={handleSubmit}
                 className="space-y-4">
 
-                {/* Email - Readonly  */}
+                {/* Email-----  */}
                 <input
                     type="email"
                     name='email'

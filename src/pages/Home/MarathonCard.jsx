@@ -3,44 +3,53 @@ import { SlCalender } from "react-icons/sl";
 import { Link } from "react-router";
 
 const MarathonCard = ({ marathon }) => {
-    const { image, location, registrationDates, title, _id,description  } = marathon
+  const { image, location, registrationDates, title, _id, description } = marathon;
 
-    return (
+  return (
+    <div className="w-full sm:w-[300px] md:w-[350px] lg:w-[400px] bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-purple-400 transition duration-300 ease-in-out">
       
-         <div className=" w-80 shadow-lg hover:shadow-purple-400 fira-sans-extralight">
-            
-            <figure>
-              <img className="rounded-t-2xl"
-                     src={image}
-                     alt="marathonCard" />
-                </figure>
-                <div className="card-body">
-                    <h2 className="card-title">
-                        {title}
-                        <div className="badge badge-secondary bg-purple-500 border border-purple-500 text-white font-bold edu-nsw-act-cursive-font text-xs">NEW</div>
-                    </h2>                  
-                    <p className="text-gray-500">{description}</p>
 
-                    <div className="text-gray-600 text-2xl flex gap-1"><IoLocationSharp /> <span className="text-lg ">{location}</span></div>
+      <figure>
+        <img
+          className="w-full h-56 object-cover rounded-t-2xl"
+          src={image}
+          alt="marathonCard"
+        />
+      </figure>
 
-                    <div className="text-gray-600 text-2xl poppins-extralight flex gap-2">  <SlCalender />
-                    <span className="text-gray-600 text-lg ">
-                       {registrationDates}
-                        </span>
-                        </div>
-                        <h1 className="text-lg text-green-700 font-bold edu-nsw-act-cursive-font">Running</h1>
-                        
-                        <div>
-                            <Link to={`/marathonCardDetails/${_id}`}>
-                               <button className="btn bg-black text-white hover:bg-purple-200 hover:text-black">See Details.</button>
-                            </Link>
-                        </div>
-                  
-                </div>
-            </div>
-       
-      
-    );
+    
+      <div className="p-4 flex flex-col gap-3">
+        <div className="flex justify-between items-center">
+          <h2 className="text-xl font-bold">{title}</h2>
+          <div className="badge bg-purple-500 text-white text-xs font-semibold px-2 py-1 rounded">
+            NEW
+          </div>
+        </div>
+
+        <p className="text-gray-500 text-sm">{description}</p>
+
+        <div className="flex items-center text-gray-600 gap-2 text-sm">
+          <IoLocationSharp className="text-lg" />
+          <span>{location}</span>
+        </div>
+
+        <div className="flex items-center text-gray-600 gap-2 text-sm">
+          <SlCalender className="text-lg" />
+          <span>{registrationDates}</span>
+        </div>
+
+        <h1 className="text-md text-green-700 font-semibold">Running</h1>
+
+        <div className="mt-2">
+          <Link to={`/marathonCardDetails/${_id}`}>
+            <button className="w-full btn bg-black text-white hover:bg-purple-200 hover:text-black transition duration-200">
+              See Details
+            </button>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default MarathonCard;

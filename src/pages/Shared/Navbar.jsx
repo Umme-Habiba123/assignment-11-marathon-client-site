@@ -1,100 +1,108 @@
 import React, { use } from 'react';
 import { Link, NavLink } from 'react-router';
-import userPhoto from '../../assets/user.png'
+import userPhoto from '../../assets/user.png';
 import { GiRunningNinja } from "react-icons/gi";
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 
 const Navbar = () => {
+  const { signOutUser, user } = use(AuthContext);
 
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {
+        console.log('sign out');
+      }).catch(error => {
+        console.log(error);
+      });
+  };
 
-    const {signOutUser}=use(AuthContext)
-      const handleSignOut=()=>{
-        signOutUser()
-        .then(()=>{
-            console.log('sign out')
-        }).catch(error=>{
-            console.log(error)
-        })   
+  const links = <>
+    <li><NavLink to={'/'}>HOME</NavLink></li>
+    <li><NavLink to={'/marathons'}>MARATHONS</NavLink></li>
+    {
+      user && <>
+        <li><NavLink to={'/dashBoard'}>DASHBOARD</NavLink></li>
+        <li><NavLink to={'/addMarathon'}>ADD MARATHON</NavLink></li>
+        <li><NavLink to={'/myMarathonsList'}>MY MARATHONS LIST</NavLink></li>
+        <li><NavLink to={'/myApplyList'}>MY APPLY LIST</NavLink></li>
+      </>
     }
+  </>;
 
+  return (
+    <div className='bg-[#f5edf8] w-full shadow-md'>
+      <div className="navbar w-10/12 mx-auto px-2 py-8 flex justify-between items-center">
 
-    const {user}=use(AuthContext)
+        <div className="flex items-center gap-2">
+          <div className="dropdown lg:hidden">
+            <label tabIndex={0} className="btn btn-ghost">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </label>
+            <ul tabIndex={0} className="dropdown-content menu menu-sm mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-sm text-gray-600">
+              {links}
+            </ul>
+          </div>
+          <Link to="/" className="flex items-center gap-1 text-xl lg:text-4xl font-bold">
+            <GiRunningNinja size={30} />
+            <span>Race<span className='text-purple-600'>Clock</span></span>
+          </Link>
+        </div>
 
-    const links = <>
-        <Link to={'/'}><li><p>HOME.</p></li> </Link>
-
-        <Link to={'/marathons'}><li><p>MARATHONS.</p></li> </Link>
-        {
-            user && <>
-              <Link to={'/dashBoard'}><li><p>DASHBOARD.</p></li> </Link>
-
-        <Link to={'/addMarathon'}><li><p>ADD MARATHON.</p></li> </Link>
-
-        <Link to={'/myMarathonsList'}><li><p>My MARATHONS LIST.</p></li> </Link>
-
-        <Link to={'/myApplyList'}><li><p>MY APPLY LIST.</p></li> </Link>
-            </>
-        }
-      
-    </>
-    return (
-        <div className='bg-[#f5edf8] px-15 py-5  w-12/12 mx-auto '>
-
-            <div className="navbar satisfy-regular tagesschrift-regular mt-5  py-5">
-                <div className="navbar-start">
-                    <div className="dropdown">
-                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
-                        </div>
-                        <ul
-                            tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 text-gray-500 poppins-extralight text-xs">
-
-                            {links}
-
-                        </ul>
-                    </div>
-
-                  <Link to={'/'}>
-                    <h1 style={{wordSpacing:'0', margin: 0}} className="edu-nsw-act-cursive-font btn btn-ghost lg:text-3xl gap-0 md:text-xl text-sm"><GiRunningNinja size={40}/>Race<span className='text-purple-600 '>Clock</span></h1>
-                  </Link>
-
-                </div>
-                <div className="navbar-center hidden lg:flex dancing-script-font">
-                    <ul className="menu menu-horizontal px-1 lg:text-sm text-gray-500 poppins-extralight md:text-xs text-xs">
+   
+           <div className="navbar-center hidden lg:flex dancing-script-font">
+                    <ul className="menu menu-horizontal gap-4 px-1 text-sm">
 
                         {links}
 
                     </ul>
                 </div>
-               
-                <div className="navbar-end gap-2 lg:gap-6 md:gap-4">
-                   <h1>{user?.email}</h1>
-                   <h1>{user?.displayName}</h1>
-                   <img className='text-sm' src={userPhoto} alt="" />
-                  {
-                    user?  <NavLink to={'logIn'}>
-                     <button onClick={handleSignOut} className="btn border-2 border-purple-300 hover:bg-purple-200 bg-white text-sm lg:text-lg sm:text-base  fira-sans-extralight sm:w-auto">LOG OUT</button>
-                   </NavLink>:
-                   <>
-                    <NavLink to={'logIn'}>
-                     <button className="btn border-2 border-purple-300 hover:bg-purple-200 bg-white text-sm lg:text-lg fira-sans-extralight sm:text-base px-4 py-2 sm:w-auto">LOG IN</button>
-                   </NavLink>
 
-                    <NavLink to={'register'}>
-                        <button className="btn border-2 border-pink-300 hover:bg-pink-200 bg-white lg:text-lg md:text-xs fira-sans-extralight sm:text-base sm:w-auto">Registration</button>
-                    </NavLink>
-                   </>
-
-                  }
-
-                </div>
-
-            </div>
-
+        {/* User -------*/}
+        <div className="flex items-center gap-4 ">
          
+         <div className='relative group w-10 h-10'>
+           <img
+            className='w-10 h-10 rounded-full object-cover border border-purple-300'
+            src={user?.photoURL || userPhoto}
+            alt="User"
+          />
+           {
+            user?.displayName &&
+            <div>
+              <p className="absolute top-full mt-1 left-1/2 transform -translate-x-1/2 bg-gray-200 text-gra  text-xs font-semibold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">{user.displayName}</p>
+            </div>
+          }
+          
+          
+         </div>
+
+          {
+            user ?
+              <>
+                <p className="hidden sm:block text-xs text-gray-500">{user?.email}</p>
+                <button
+                  onClick={handleSignOut}
+                  className="btn btn-outline btn-sm border-purple-300 hover:bg-purple-200"
+                >
+                  LOG OUT
+                </button>
+              </>
+              :
+              <>
+                <NavLink to="/logIn">
+                  <button className="btn btn-outline btn-sm border-purple-300 hover:bg-purple-200">LOG IN</button>
+                </NavLink>
+                <NavLink to="/register">
+                  <button className="btn btn-outline btn-sm border-pink-300 hover:bg-pink-200">REGISTER</button>
+                </NavLink>
+              </>
+          }
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
-export default Navbar
+export default Navbar;

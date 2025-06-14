@@ -1,45 +1,52 @@
 import React from 'react';
 
-const UpMarathonCard = ({upcomingMarathon}) => {
+const UpMarathonCard = ({ upcomingMarathon }) => {
+  const { image, title, location, eventDate, description, trainer, price } = upcomingMarathon;
 
-    const {image,title,location,eventDate,description,trainer,price}=upcomingMarathon
+  return (
+    <div className="w-full sm:w-[300px] md:w-[350px] lg:w-[400px] bg-white rounded-2xl shadow-md hover:shadow-pink-300 transition duration-300 ease-in-out overflow-hidden">
+      
 
-    return (
-        <div className=''>
-   <div className="card bg-base-100 w-96 shadow-lg hover:shadow-pink-300 fira-sans-extralight">
-  <figure className="px-10 pt-10">
-    <img
-      src={image}
-      alt="marathons places"
-      className="rounded-xl h-60" />
-  </figure>
-  <div className="card-body items-center text-center">
-    <h2 className="card-title lg:text-2xl text-xl font-bold  edu-nsw-act-cursive-font">{title}</h2>
+      <figure className="w-full h-56 overflow-hidden">
+        <img
+          src={image}
+          alt="marathon"
+          className="w-full h-full object-cover rounded-t-2xl"
+        />
+      </figure>
 
-    <p className='text-gray-500 text-sm lg:text-lg font-semibold'>{description}</p>
-
-    <p className='font-bold text-sm lg:text-xl'>Location : <span className=' text-sm lg:text-lg text-gray-600'> {location}</span>
-    </p>
     
-    <p className='font-bold text-sm lg:text-xl'>Trainer : <span className=' text-sm lg:text-lg text-gray-600 '> {trainer}</span>
-    </p>
+      <div className="p-5 flex flex-col gap-3 text-center">
+        <h2 className="text-xl lg:text-2xl font-bold edu-nsw-act-cursive-font text-gray-800">
+          {title}
+        </h2>
 
+        <p className="text-sm lg:text-base text-gray-600">{description}</p>
 
-    <p className='font-bold text-sm lg:text-xl'>Event Date : <span className=' text-sm lg:text-lg text-gray-600'> {eventDate}</span>
-    </p>
+        <p className="text-sm lg:text-base font-semibold text-gray-700">
+          Location: <span className="text-gray-500">{location}</span>
+        </p>
 
-    <p className='font-bold text-sm lg:text-xl'>From : <span className=' text-sm lg:text-lg text-gray-600'> {price}</span>
-    </p>
+        <p className="text-sm lg:text-base font-semibold text-gray-700">
+          Trainer: <span className="text-gray-500">{trainer}</span>
+        </p>
 
+        <p className="text-sm lg:text-base font-semibold text-gray-700">
+          Event Date: <span className="text-gray-500">{eventDate}</span>
+        </p>
 
-   
-    <div className="card-actions">
-      <button className="btn btn-primary bg-pink-400 border-pink-400 hover:bg-white hover:text-black">Get Started</button>
-    </div>
-  </div>
-</div>
+        <p className="text-sm lg:text-base font-semibold text-gray-700">
+          Price: <span className="text-gray-500">{price}</span>
+        </p>
+
+        <div className="pt-2">
+          <button className="btn bg-pink-400 border-pink-400 text-white hover:bg-white hover:text-black transition">
+            Get Started
+          </button>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default UpMarathonCard;

@@ -15,9 +15,9 @@ const UpcomingMarathon = ({upcomingMarathonePromise}) => {
 
     <h1 className='text-4xl text-center text-gray-600 fira-sans-extralight mb-10'>Our Upcoming deals</h1>
 
-           <div className='grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6 lg:gap-10 md:gap-8 '>
+           <div className='grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6 lg:gap-20 md:gap-50 '>
              {
-               upcomingMarathons.map((upcomingMarathon=><UpMarathonCard key={upcomingMarathon._id}  upcomingMarathon={upcomingMarathon}></UpMarathonCard>)) 
+               upcomingMarathons.map((upcomingMarathon)=><UpMarathonCard key={upcomingMarathon._id}  upcomingMarathon={upcomingMarathon}></UpMarathonCard>)
             }
            
            </div>
