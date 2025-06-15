@@ -34,6 +34,8 @@ const LogIn = () => {
                 navigate(formm)
                 console.log(result)
             }).catch(error => {
+                console.log(error)
+
                 if (error.code === 'auth/wrong-password') {
                     Swal.fire({
                         icon: "error",
@@ -49,6 +51,21 @@ const LogIn = () => {
                         title: "sorry...",
                         text: "User not found",
 
+                    });
+                }
+                else if (error.code === 'auth/invalid-credential') {
+                    Swal.fire({
+                        icon: "error",
+                        title: "sorry...",
+                        text: "please check your email and password",
+
+                    });
+                }
+                else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Login failed",
+                        text: error.message,
                     });
                 }
 

@@ -6,6 +6,7 @@ import { TbFileDescription } from "react-icons/tb";
 import { CiCalendar } from "react-icons/ci";
 import { motion } from "motion/react";
 
+
 const CardDetails = () => {
   const {
     _id,
@@ -19,19 +20,22 @@ const CardDetails = () => {
     totalRegCount
   } = useLoaderData();
 
-  const today=new Date()
-  today.setHours(0,0,0,0)
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
 
-  const start=new Date()
-  start.setHours(0,0,0,0)
+  const start = new Date()
+  start.setHours(0, 0, 0, 0)
 
-  const end =new Date()
-  end.setHours(0,0,0,0)
+  const end = new Date()
+  end.setHours(0, 0, 0, 0)
 
   // Registration time check
   const now = new Date();
   const isRegistrationOpen =
     new Date(startRegistration) <= now && now <= new Date(endRegistration);
+
+
+
 
   return (
     <div className="flex flex-col-reverse lg:flex-row justify-between items-center lg:items-start gap-10 px-4 md:px-8 lg:px-20 py-10 max-w-7xl mx-auto">
@@ -79,7 +83,7 @@ const CardDetails = () => {
 
         <p className="text-xl font-bold flex gap-2 items-start">
           <MdSocialDistance size={25} />
-         Total Registration Count :
+          Total Registration Count :
           <span className="text-gray-700 font-normal">{totalRegCount}</span>
         </p>
 

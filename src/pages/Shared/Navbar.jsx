@@ -21,7 +21,13 @@ const Navbar = () => {
     <li><NavLink to={'/marathons'}>MARATHONS</NavLink></li>
     {
       user && <>
-        <li><NavLink to={'/dashBoard'}>DASHBOARD</NavLink></li>
+<div className="dropdown dropdown-hover">
+  <div tabIndex={0} role="button" className=" m-1 mt-2 cursor-pointer">DASHBOARD</div>
+  <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+     <li><NavLink to={'/myApplyList'}>MY APPLY LIST</NavLink></li>
+  </ul>
+</div>
+
         <li><NavLink to={'/addMarathon'}>ADD MARATHON</NavLink></li>
         <li><NavLink to={'/myMarathonsList'}>MY MARATHONS LIST</NavLink></li>
         <li><NavLink to={'/myApplyList'}>MY APPLY LIST</NavLink></li>

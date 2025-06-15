@@ -13,6 +13,7 @@ import Marathons from "../pages/marathonPages/Marathons";
 import CardDetails from "../pages/marathonPages/CardDetails";
 import MarathonsRegistration from "../pages/marathonPages/MarathonsRegistration";
 import MyApplyList from "../pages/marathonPages/MyApplyList";
+import MyRegistrationPage from "../pages/marathonPages/MyRegistrationPage";
 
 const router = createBrowserRouter([
   {
@@ -66,9 +67,10 @@ const router = createBrowserRouter([
         {
           path:'myApplyList',
           element: <PrivateRoute>
-            <MyApplyList></MyApplyList>
+           <MyRegistrationPage></MyRegistrationPage>
           </PrivateRoute>
-        }
+        },
+        
     ]
   },
 ]);

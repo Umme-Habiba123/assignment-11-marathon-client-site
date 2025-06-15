@@ -2,11 +2,13 @@ import React, { use, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import { useLoaderData, useParams } from 'react-router';
 import { format } from "date-fns";
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 
 
 const MarathonsRegistration = () => {
-    const marathon=useLoaderData()
+    const marathon = useLoaderData()
     console.log(marathon)
     const { user } = use(AuthContext)
     const { id } = useParams()
@@ -17,21 +19,44 @@ const MarathonsRegistration = () => {
         lastName: "",
         contactNumber: "",
         additionalInfo: "",
+
     })
 
     const handleSubmit = e => {
         e.preventDefault()
 
         const registration = {
-            email: user.email,
+           applicantEmail: user.email,
             marathonId: id,
-            marathonsTitle:marathon.title,
+            marathonsTitle: marathon.title,
             marathonDate: marathon.marathonDate,
             ...formData,
-            registredAt:new Date()
+            registredAt: new Date()
         }
         console.log("Registration Data:", registration)
 
+
+        axios.post('http://localhost:5000/apply', registration)
+            .then(res => {
+                console.log(res.data)
+                 // patch---------
+            axios.patch(`http://localhost:5000/marathons/increment/${id}`).then(updateRes=>{
+                console.log('Registration count incremented:', updateRes)
+            }).catch(error=>{
+                console.log(error)
+            })
+                Swal.fire({
+                    icon: "success",
+                    title: "Your submission has been submitted",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }).catch(error => {
+                console.log(error)
+            })
+
+
+           
     }
 
 
@@ -63,26 +88,27 @@ const MarathonsRegistration = () => {
                     name='email'
                     value={user?.email || ""}
                     readOnly
-                    className="w-full p-2  border border-gray-300 rounded text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-300"
+                    className="w-full cursor-not-allowed p-2  border border-gray-300 rounded text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-300"
                 />
 
-                {/* Marathon Title - Readonly */}
+                {/* Marathon Title---- Readonly */}
                 <input
                     type="text"
                     value={marathon?.title || ''}
                     readOnly
-                    className="w-full p-2 border border-gray-300 rounded text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-300"
+                    
+                    className="w-full cursor-not-allowed p-2 border border-gray-300 rounded text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-300"
                 />
 
-                {/* Marathon Date - Readonly */}
+                {/* Marathon Date----- Readonly */}
                 <input
                     type="text"
                     value={format(new Date(marathon.marathonDate), "yyyy-MM-dd")}
                     readOnly
-                    className="w-full p-2 border border-gray-300 rounded text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-300"
+                    className="w-full cursor-not-allowed p-2 border border-gray-300 rounded text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-300"
                 />
 
-                {/* First Name */}
+                {/* First Name------- */}
                 <input
                     type="text"
                     name="firstName"
@@ -92,7 +118,7 @@ const MarathonsRegistration = () => {
                     className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-300"
                 />
 
-                {/* Last Name */}
+                {/* Last Name ----------*/}
                 <input
                     type="text"
                     name="lastName"
@@ -102,7 +128,7 @@ const MarathonsRegistration = () => {
                     className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-300"
                 />
 
-                {/* Contact Number */}
+                {/* Contact Number--------- */}
                 <input
                     type="tel"
                     name="contactNumber"
@@ -112,7 +138,7 @@ const MarathonsRegistration = () => {
                     className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-300"
                 />
 
-                {/* Additional Info */}
+                {/* Additional Info -----------*/}
                 <textarea
                     name="additionalInfo"
                     onChange={handleChange}
@@ -120,13 +146,13 @@ const MarathonsRegistration = () => {
                     className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-300"
                 ></textarea>
 
-                {/* Submit Button */}
+                {/* Submit Button---------- */}
                 <button
                     type="submit"
                     disabled={!isRegistrationOpen()}
                     className={`w-full py-2 px-4 text-white font-semibold rounded ${isRegistrationOpen()
-                            ? "bg-blue-600 hover:bg-blue-700"
-                            : "bg-gray-400 cursor-not-allowed"
+                        ? "bg-blue-600 hover:bg-blue-700"
+                        : "bg-gray-400 cursor-not-allowed"
                         }`}
                 >
                     {isRegistrationOpen() ? "Submit Registration" : "Registration Closed"}
