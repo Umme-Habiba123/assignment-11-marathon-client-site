@@ -1,42 +1,54 @@
 import { use } from "react";
 import ApplyRegRow from "./ApplyRegRow";
+import { Typewriter } from 'react-simple-typewriter';
 
-const MyApplyList = ({myAppyPromise}) => {
+
+const MyApplyList = ({ myAppyPromise }) => {
   console.log(myAppyPromise)
-    const registration=use(myAppyPromise)  
-  
+  const registration = use(myAppyPromise)
 
+  return (
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 poppins-extralight">
+      <p className="mt-8 text-center text-cyan-600 text-xl sm:text-2xl md:text-3xl edu-nsw-act-cursive-font font-semibold">
+        <Typewriter
+          words={[`Registrations have been made with this Email : ${registration.length}`]}
+          loop={0}
+          cursor
+          cursorStyle='_'
+          typeSpeed={70}
+          deleteSpeed={50}
+          delaySpeed={1000}
+          onLoopDone={() => console.log('Loop done')}
+          onType={(count) => console.log('Typing', count)}
+        />
+      </p>
 
-    return (
-        <div className="w-8/12 mx-auto poppins-extralight">
-            <p className="mt-5 text-center text-3xl edu-nsw-act-cursive-font font-semibold">Total Registration with this id : {registration.length}</p>
-           <div className="overflow-x-auto">
-  <table className="table my-10">
-    {/* head */}
-    <thead>
-      <tr>
-        <th>
-       <h1 className="text-xl">#</h1>
-        </th>
-        <th>Name and Email</th>
-        <th>Additional Info.</th>
-        <th>Marathons Date & Title</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody className="fira-sans-extralight">
-      {
-        registration.map((myApply,index)=>(
-           <ApplyRegRow index={index} myApply={myApply} key={myApply._id}></ApplyRegRow> 
-        ))
-      }
-     
-    </tbody>
-  
-  </table>
-</div>
-        </div>
-    );
+      <div className="overflow-x-auto mt-10">
+        <table className="table w-full min-w-[600px] sm:min-w-full">
+          {/* head */}
+          <thead>
+            <tr>
+              <th>
+                <h1 className="text-lg sm:text-xl">#</h1>
+              </th>
+              <th className="text-sm sm:text-base">Name and Email</th>
+              <th className="text-sm sm:text-base">Additional Info.</th>
+              <th className="text-sm sm:text-base">Marathons Date & Title</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody className="fira-sans-extralight text-xs sm:text-sm">
+            {
+              registration.map((myApply, index) => (
+                <ApplyRegRow index={index} myApply={myApply} key={myApply._id}></ApplyRegRow>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 };
+
 
 export default MyApplyList;
