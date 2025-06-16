@@ -16,7 +16,7 @@ const MyRegistrationPage = () => {
            <Suspense fallback={<h1 className='text-center text-2xl my-30'>...Loadingggg.....</h1>}>
              {/* <MarathonsRegistration></MarathonsRegistration> */}
              
-            <MyApplyList myAppyPromise={myApplyPromise(user.email)} >
+            <MyApplyList myApplyPromise={myApplyPromise(user.email)} >
            
             </MyApplyList>
            </Suspense>

@@ -1,11 +1,12 @@
-import { use } from "react";
+import { use} from "react";
 import ApplyRegRow from "./ApplyRegRow";
 import { Typewriter } from 'react-simple-typewriter';
 
 
-const MyApplyList = ({ myAppyPromise }) => {
-  console.log(myAppyPromise)
-  const registration = use(myAppyPromise)
+const MyApplyList = ({ myApplyPromise }) => {
+
+  const registration = use(myApplyPromise)
+console.log(registration)
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 poppins-extralight">
@@ -40,9 +41,17 @@ const MyApplyList = ({ myAppyPromise }) => {
           <tbody className="fira-sans-extralight text-xs sm:text-sm">
             {
               registration.map((myApply, index) => (
-                <ApplyRegRow index={index} myApply={myApply} key={myApply._id}></ApplyRegRow>
+                <ApplyRegRow 
+                index={index}
+         
+                 myApply={myApply} 
+                 key={myApply._id}
+                id={myApply._id}></ApplyRegRow>
               ))
             }
+        
+              
+            
           </tbody>
         </table>
       </div>

@@ -12,8 +12,12 @@ import PrivateRoute from "./PrivateRoute";
 import Marathons from "../pages/marathonPages/Marathons";
 import CardDetails from "../pages/marathonPages/CardDetails";
 import MarathonsRegistration from "../pages/marathonPages/MarathonsRegistration";
-import MyApplyList from "../pages/marathonPages/MyApplyList";
 import MyRegistrationPage from "../pages/marathonPages/MyRegistrationPage";
+import MyMarathonsList from "../pages/myMarathonList/MyMarathonsList";
+import AboutMe from "../Components/AboutMe";
+import FollowMore from "../Components/FollowMore";
+import UpdateRegistrationInfo from "../pages/marathonPages/UpdateRegistrationInfo";
+
 
 const router = createBrowserRouter([
   {
@@ -45,6 +49,13 @@ const router = createBrowserRouter([
           </PrivateRoute>
         },
         {
+          path:'myMarathonsList',
+          element:<PrivateRoute>
+            <MyMarathonsList></MyMarathonsList>
+          </PrivateRoute>,
+          loader: () => fetch('http://localhost:5000/marathons')
+        },
+        {
           path:'marathons',
            loader: ()=>fetch('http://localhost:5000/marathons'),
           element: <PrivateRoute>
@@ -62,7 +73,6 @@ const router = createBrowserRouter([
           path: 'marathonsRegistration/:id',
            loader: ({ params }) => fetch(`http://localhost:5000/marathons/${params.id}`).then(res => res.json()),
           element: <PrivateRoute><MarathonsRegistration></MarathonsRegistration></PrivateRoute>
-
         },
         {
           path:'myApplyList',
@@ -70,7 +80,21 @@ const router = createBrowserRouter([
            <MyRegistrationPage></MyRegistrationPage>
           </PrivateRoute>
         },
-        
+        {
+          path: 'followMore',
+          element: <PrivateRoute>
+            <FollowMore></FollowMore>
+          </PrivateRoute>
+        },
+        {
+          path:'updateApplyInfo/:id',  
+          // applyInfo = registerInfo----
+          loader: (params)=>fetch(`http://localhost:5000/apply/${params.id}`),
+          element:<PrivateRoute>
+            <UpdateRegistrationInfo></UpdateRegistrationInfo>
+          </PrivateRoute>
+        }
+
     ]
   },
 ]);
