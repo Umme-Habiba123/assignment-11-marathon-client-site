@@ -16,7 +16,6 @@ import MyRegistrationPage from "../pages/marathonPages/MyRegistrationPage";
 import MyMarathonsList from "../pages/myMarathonList/MyMarathonsList";
 import AboutMe from "../Components/AboutMe";
 import FollowMore from "../Components/FollowMore";
-import UpdateRegistrationInfo from "../pages/marathonPages/UpdateRegistrationInfo";
 
 
 const router = createBrowserRouter([
@@ -86,14 +85,14 @@ const router = createBrowserRouter([
             <FollowMore></FollowMore>
           </PrivateRoute>
         },
-        {
-          path:'updateApplyInfo/:id',  
-          // applyInfo = registerInfo----
-          loader: (params)=>fetch(`http://localhost:5000/apply/${params.id}`),
-          element:<PrivateRoute>
-            <UpdateRegistrationInfo></UpdateRegistrationInfo>
-          </PrivateRoute>
-        }
+        // {
+        //   path:'updateApplyInfo/:id',  
+        //   // applyInfo = registerInfo----
+        //   loader: (params)=>fetch(`http://localhost:5000/apply/${params.id}`),
+        //   element:<PrivateRoute>
+        //     <UpdateRegistrationInfo></UpdateRegistrationInfo>
+        //   </PrivateRoute>
+        // }
 
     ]
   },

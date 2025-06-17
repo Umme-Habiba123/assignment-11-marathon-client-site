@@ -18,7 +18,7 @@ const Navbar = () => {
 
   const links = <>
     <li><NavLink to={'/'}>HOME</NavLink></li>
-    <li><NavLink to={'/marathons'}>MARATHONS</NavLink></li>
+    <li><NavLink to={'/marathons'}>MY MARATHONS LIST</NavLink></li>
     {
       user && <>
 <div className="dropdown dropdown-hover">
@@ -29,7 +29,7 @@ const Navbar = () => {
 </div>
 
         <li><NavLink to={'/addMarathon'}>ADD MARATHON</NavLink></li>
-        <li><NavLink to={'/myMarathonsList'}>MY MARATHONS LIST</NavLink></li>
+        <li><NavLink to={'/myMarathonsList'}>MARATHONS</NavLink></li>
        
       </>
     }

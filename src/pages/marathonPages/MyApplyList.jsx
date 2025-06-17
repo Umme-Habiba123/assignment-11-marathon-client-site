@@ -6,7 +6,7 @@ import { Typewriter } from 'react-simple-typewriter';
 const MyApplyList = ({ myApplyPromise }) => {
 
   const registration = use(myApplyPromise)
-console.log(registration)
+   console.log(registration)
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 poppins-extralight">
@@ -33,9 +33,10 @@ console.log(registration)
                 <h1 className="text-lg sm:text-xl">#</h1>
               </th>
               <th className="text-sm sm:text-base">Name and Email</th>
-              <th className="text-sm sm:text-base">Additional Info.</th>
-              <th className="text-sm sm:text-base">Marathons Date & Title</th>
+              <th className="text-sm sm:text-base">Additional Info. &  .Contact</th>
+              <th className="text-sm sm:text-base">Marathons Title & Date </th>
               <th></th>
+              
             </tr>
           </thead>
           <tbody className="fira-sans-extralight text-xs sm:text-sm">

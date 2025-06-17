@@ -1,10 +1,10 @@
 import React from 'react';
-import followMe from '../../public/thanku.jpg'
+// import follow from '../assets/'
 
 const FollowMore = () => {
     return (
         <div className='w-4/12 mx-auto my-20'>
-            <img src={followMe} alt="" />
+            <img src='' alt="" />
         </div>
     );
 };

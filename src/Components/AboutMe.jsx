@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { motion } from 'framer-motion';
 import { MdFollowTheSigns } from "react-icons/md";
-import photo from '../../public/myself1.jpg'
+// import myPhoto from ''
 
 
 const AboutMe = () => {
@@ -36,10 +36,12 @@ const AboutMe = () => {
                     initial={{ opacity: 0, x: 100 }}
                     animate={{ opacity: 5, x: 0 }}
                     transition={{ duration: 1.5 }}
+                    loop={{Infinity}}
+                
                 >
                     <img
                         className='rounded-lg shadow-xl w-full h-auto object-cover max-h-[500px]'
-                        src={photo}
+                        src=''
                         alt="Mahiya"
                     />
                 </motion.div>
