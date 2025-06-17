@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         {
           path:'/marathonCardDetails/:id',
           Component: MarathonCardDetails,
-          loader: ({params})=>fetch(`http://localhost:5000/marathonData/${params.id}`)
+          // loader: ({params})=>fetch(`http://localhost:5000/marathonData/${params.id}`)
         },
         {
           path: 'addMarathon',
@@ -47,6 +47,7 @@ const router = createBrowserRouter([
             <AddMarathon></AddMarathon>
           </PrivateRoute>
         },
+
         {
           path:'myMarathonsList',
           element:<PrivateRoute>
@@ -54,6 +55,7 @@ const router = createBrowserRouter([
           </PrivateRoute>,
           loader: () => fetch('http://localhost:5000/marathons')
         },
+
         {
           path:'marathons',
            loader: ()=>fetch('http://localhost:5000/marathons'),
@@ -63,7 +65,7 @@ const router = createBrowserRouter([
         },
         {
           path:'cardDetails/:id',
-          loader:({params})=>fetch(`http://localhost:5000/marathons/${params.id}`).then(res=>res.json()),
+          // loader:({params})=>fetch(`http://localhost:5000/marathons/${params.id}`).then(res=>res.json()),
           element: <PrivateRoute>
             <CardDetails></CardDetails>
           </PrivateRoute>

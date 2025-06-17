@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { motion } from 'framer-motion';
 import { MdFollowTheSigns } from "react-icons/md";
-// import myPhoto from ''
+import myPhoto from '../assets/myself1.jpg'
 
 
 const AboutMe = () => {
@@ -41,7 +41,7 @@ const AboutMe = () => {
                 >
                     <img
                         className='rounded-lg shadow-xl w-full h-auto object-cover max-h-[500px]'
-                        src=''
+                        src={myPhoto}
                         alt="Mahiya"
                     />
                 </motion.div>

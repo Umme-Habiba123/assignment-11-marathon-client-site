@@ -4,9 +4,11 @@ import MarathonsNews from '../Home/MarathonsNews';
 
 import { useLoaderData } from 'react-router';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
-import { marathonsPromise } from '../../api/marathonsApi';
+import useMarathonsApi from '../../api/useMarathonsApi';
 
 const MyMarathonsList = () => {
+
+    const {marathonsPromise}=useMarathonsApi()
     
     const {user}=use(AuthContext)
     const data=useLoaderData()
@@ -14,7 +16,10 @@ const MyMarathonsList = () => {
     return (
         <div>
           
-             <MarathonsNews marathonsPromise={marathonsPromise(user.email,user.accessToken)} data={data}></MarathonsNews  >
+            <Suspense fallback={<h1 className='text-center text-4xl font-bold'>....Loading.....</h1>}>
+            
+                 <MarathonsNews marathonsPromise={marathonsPromise(user.email,user.accessToken)} data={data}></MarathonsNews  >
+            </Suspense>
      
           
            

@@ -8,8 +8,7 @@ import AboutMe from '../../Components/AboutMe';
 
 
 
-const marathonPromise = fetch('http://localhost:5000/marathonData')
-    .then(res => res.json())
+// const marathonPromise = fetch('http://localhost:5000/marathonData').then(res => res.json())
 
 const upcomingMarathonePromise = fetch('http://localhost:5000/marathon2').then(res => res.json())
 
