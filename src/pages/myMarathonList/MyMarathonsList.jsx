@@ -14,7 +14,7 @@ const MyMarathonsList = () => {
     return (
         <div>
           
-             <MarathonsNews marathonsPromise={marathonsPromise(user.email,user.accessToken)} data={data}></MarathonsNews>
+             <MarathonsNews marathonsPromise={marathonsPromise(user.email,user.accessToken)} data={data}></MarathonsNews  >
      
           
            
