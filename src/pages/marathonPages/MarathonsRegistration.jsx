@@ -2,9 +2,8 @@ import React, { use, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import { useLoaderData, useParams } from 'react-router';
 import { format } from "date-fns";
-import axios from 'axios';
 import Swal from 'sweetalert2';
-
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 
 const MarathonsRegistration = () => {
@@ -12,8 +11,10 @@ const MarathonsRegistration = () => {
     console.log(marathon)
     const { user } = use(AuthContext)
     const { id } = useParams()
+      const axiosSecure = useAxiosSecure();
 
-    // const [marathons, setMarathons] = useState(null)
+
+   
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -36,11 +37,11 @@ const MarathonsRegistration = () => {
         console.log("Registration Data:", registration)
 
 
-        axios.post('http://localhost:5000/apply', registration)
+        axiosSecure.post('/apply', registration)
             .then(res => {
                 console.log(res.data)
                  // patch---------
-            axios.patch(`http://localhost:5000/marathons/increment/${id}`).then(updateRes=>{
+           axiosSecure.patch(`/marathons/increment/${id}`).then(updateRes=>{
                 console.log('Registration count incremented:', updateRes)
             }).catch(error=>{
                 console.log(error)
@@ -54,9 +55,6 @@ const MarathonsRegistration = () => {
             }).catch(error => {
                 console.log(error)
             })
-
-
-           
     }
 
 
@@ -103,7 +101,10 @@ const MarathonsRegistration = () => {
                 {/* Marathon Date----- Readonly */}
                 <input
                     type="text"
-                    value={format(new Date(marathon.marathonDate), "yyyy-MM-dd")}
+                    value={
+                        marathon?.marathonDate?format(new Date(marathon.marathonDate), "yyyy-MM-dd"):
+                        " "
+                    }
                     readOnly
                     className="w-full cursor-not-allowed p-2 border border-gray-300 rounded text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-300"
                 />
@@ -112,6 +113,7 @@ const MarathonsRegistration = () => {
                 <input
                     type="text"
                     name="firstName"
+                     value={formData.firstName}
                     onChange={handleChange}
                     placeholder="First Name"
                     required
@@ -122,6 +124,7 @@ const MarathonsRegistration = () => {
                 <input
                     type="text"
                     name="lastName"
+                    value={formData.lastName}
                     onChange={handleChange}
                     placeholder="Last Name"
                     required
@@ -132,6 +135,7 @@ const MarathonsRegistration = () => {
                 <input
                     type="tel"
                     name="contactNumber"
+                      value={formData.contactNumber} 
                     onChange={handleChange}
                     placeholder="Contact Number"
                     required
@@ -141,6 +145,7 @@ const MarathonsRegistration = () => {
                 {/* Additional Info -----------*/}
                 <textarea
                     name="additionalInfo"
+                    
                     onChange={handleChange}
                     placeholder="Additional Info (Optional)"
                     className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-300"

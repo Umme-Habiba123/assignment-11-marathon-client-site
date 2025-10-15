@@ -1,10 +1,11 @@
-import React, { Suspense, useMemo, useContext } from 'react';
+import React, { Suspense, useMemo, useContext, use } from 'react';
 import MyApplyList from './MyApplyList';
 import useRegistrationApi from '../../api/useRegistrationApi';
-import { AuthContext } from '../../context/AuthContext/AuthContext';
+// import { AuthContext } from '../../context/AuthContext/AuthContext';
+import useAuth from '../../hooks/useAuth';
 
 const MyRegistrationPage = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth()
   const { getMyApplications } = useRegistrationApi();
 
   

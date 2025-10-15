@@ -3,6 +3,7 @@ import MarathonCard from "./MarathonCard";
 
 
 const MarathonsNews = ({ data }) => {
+    
 
     return (
         <div className="max-w-7xl px-4 sm:px-6 lg:px-8 mt-20 mx-auto ">

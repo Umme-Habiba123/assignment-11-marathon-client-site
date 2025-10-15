@@ -6,4 +6,3 @@ export const myApplyPromise= async (email, accessToken)=>{
     }
    }).then(res=>res.json())
  }
- 

@@ -30,6 +30,7 @@ const AddMarathon = () => {
             image: form.marathonsImage.value,
             createAt: new Date(),
             totalRegCount: 0
+            
         }
         console.log(marathon)
 
@@ -72,9 +73,8 @@ const AddMarathon = () => {
             <div className={`${theme === 'synthwave' ? 'bg-[#1e1e2f] text-white ' : 'bg-white text-black '} 
         w-8/12 mx-auto my-10 space-y-5 dancing-script-font`}>
                 <Helmet>
-                    <title>
-                        ADD Marathon || RaceClock
-                    </title>
+                    <title>add marathons || raceClock</title>
+                    <meta name="description" content="Nested component" />
                 </Helmet>
                 <div>
                     <h1 className='tagesschrift-regular text-5xl text-center mt-20'>Add Marathons </h1>
@@ -143,7 +143,7 @@ const AddMarathon = () => {
                                 <option value="5k">5k</option>
                                 <option value="10k">10k</option>
                                 <option value="15k">15k</option>
-                                <option value="25">25</option>
+                                <option value="25">25K</option>
                                 <option value="20k">30k</option>
                                 <option value="35k">35k</option>
                             </select>

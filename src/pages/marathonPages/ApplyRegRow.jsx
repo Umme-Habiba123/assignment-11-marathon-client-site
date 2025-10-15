@@ -1,13 +1,14 @@
+import React, { useContext } from "react";
+import Swal from "sweetalert2";
 import { CiCircleRemove } from "react-icons/ci";
 import { MdModeEditOutline } from "react-icons/md";
-import Swal from 'sweetalert2';
-import { AuthContext } from "../../context/AuthContext/AuthContext";
 import { format } from "date-fns";
-import { use } from "react";
-import axios from "axios";
+import { AuthContext } from "../../context/AuthContext/AuthContext";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
-const ApplyRegRow = ({ id, myApply, index }) => {
-  const { user } = use(AuthContext);
+const ApplyRegRow = ({ id, myApply, index, onUpdateSuccess, onDeleteSuccess }) => {
+  const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
 
   const {
     _id,
@@ -20,8 +21,10 @@ const ApplyRegRow = ({ id, myApply, index }) => {
     marathonDate,
   } = myApply;
 
+
   const handleUpdate = async (e) => {
     e.preventDefault();
+
     const form = e.target;
     const updatedData = {
       firstName: form.firstName.value,
@@ -31,20 +34,27 @@ const ApplyRegRow = ({ id, myApply, index }) => {
     };
 
     try {
-      const response = await axios.put(`http://localhost:5000/apply/${_id}`, updatedData);
+      const response = await axiosSecure.put(`/apply/${_id}`, updatedData);
 
       if (response.data.modifiedCount > 0) {
         Swal.fire({
           icon: "success",
           title: "Updated!",
           text: "Registration has been updated successfully.",
+          timer: 2000,
+          showConfirmButton: false,
         });
-        document.getElementById(`modal_${_id}`).close(); // ✅ Close modal after update
+        document.getElementById(`modal_${_id}`).close();
+
+      
+        if (onUpdateSuccess) onUpdateSuccess();
       } else {
         Swal.fire({
           icon: "info",
           title: "No Changes",
           text: "No updates were made to this registration.",
+          timer: 2000,
+          showConfirmButton: false,
         });
       }
     } catch (error) {
@@ -57,163 +67,185 @@ const ApplyRegRow = ({ id, myApply, index }) => {
     }
   };
 
-  const handleDelete = () => {
-    Swal.fire({
+
+  const handleDelete = async () => {
+    const confirmResult = await Swal.fire({
       title: "Are you sure?",
-      text: `You are about to delete the registration of ${firstName} ${lastName}? This action cannot be undone.`,
+      text: `You are about to delete the registration of ${firstName} ${lastName}. This action cannot be undone!`,
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
       confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetch(`http://localhost:5000/apply/${id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.deletedCount) {
-              Swal.fire({
-                title: "Deleted!",
-                text: `${firstName} ${lastName}'s registration has been successfully deleted.`,
-                icon: "success",
-              });
-            }
-          });
-      }
     });
+
+    if (confirmResult.isConfirmed) {
+      try {
+        const response = await axiosSecure.delete(`/apply/${_id}`);
+        if (response.data.deletedCount) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Registration has been deleted successfully.",
+            icon: "success",
+            timer: 2000,
+            showConfirmButton: false,
+          });
+
+
+          if (onDeleteSuccess) onDeleteSuccess(_id);
+        }
+      } catch (error) {
+        console.error("Delete error:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Delete Failed",
+          text: "Could not delete registration. Try again.",
+        });
+      }
+    }
   };
 
   return (
-    <tr className="align-top">
-      <th className="text-center">{index + 1}</th>
+    <tr className="align-top hover:bg-gray-50 transition-colors duration-200">
+      <th className="text-center text-gray-700 font-semibold">{index + 1}</th>
 
       <td>
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-          {/* <div className="avatar"></div> */}
           <div>
-            <div className="font-bold text-base">{firstName} {lastName}</div>
-            <div className="text-xs sm:text-sm opacity-50 break-words">{applicantEmail}</div>
+            <div className="font-semibold text-lg text-gray-800">
+              {firstName} {lastName}
+            </div>
+            <div className="text-sm text-gray-500 break-words">{applicantEmail}</div>
           </div>
         </div>
       </td>
 
-      <td className="whitespace-normal max-w-xs">
+      <td className="max-w-xs whitespace-normal">
         {additionalInfo ? (
-          <p className="text-sm">{additionalInfo}</p>
+          <p className="text-sm text-gray-700">{additionalInfo}</p>
         ) : (
-          <span className="text-gray-400 italic">No info</span>
+          <span className="italic text-gray-400">No info</span>
         )}
-        <p className="text-gray-700 font-bold text-center lg:mt-3 mr-3">Contact : {contactNumber}</p>
+        <p className="mt-2 text-gray-600 font-semibold text-center lg:mt-3">
+          Contact: <span className="text-indigo-600">{contactNumber}</span>
+        </p>
       </td>
 
       <td>
         <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
-          <span className="text-base font-semibold">{marathonsTitle}</span>
-          <span className="text-lg font-bold">
-            {new Date(marathonDate).toISOString().split("T")[0]}
+          <span className="text-base font-semibold text-indigo-700">{marathonsTitle}</span>
+          <span className="text-lg font-bold text-gray-900">
+            {format(new Date(marathonDate), "yyyy-MM-dd")}
           </span>
         </div>
       </td>
 
-      <th>
-        <div className="join join-vertical space-y-3">
-          <button
-            onClick={handleDelete}
-            className="join-item cursor-pointer hover:bg-gray-300 hover:scale-110 rounded-full"
-          >
-            <CiCircleRemove size={25} />
-          </button>
+      <th className="space-y-2 flex flex-col items-center justify-center">
+        <button
+          onClick={handleDelete}
+          title="Delete Registration"
+          className="rounded-full p-2 bg-red-100 text-red-600 hover:bg-red-200 transition"
+          aria-label="Delete"
+        >
+          <CiCircleRemove size={26} />
+        </button>
 
-          <button
-            className="cursor-pointer hover:scale-110 hover:font-bold join-item"
-            onClick={() => {
-              document.getElementById(`modal_${_id}`).showModal();
-            }}
-          >
-            <MdModeEditOutline size={21} />
-          </button>
+        <button
+          onClick={() => document.getElementById(`modal_${_id}`).showModal()}
+          title="Edit Registration"
+          className="rounded-full p-2 bg-indigo-100 text-indigo-600 hover:bg-indigo-200 transition"
+          aria-label="Edit"
+        >
+          <MdModeEditOutline size={24} />
+        </button>
 
-          {/* -------- Modal Start -------- */}
-          <dialog id={`modal_${_id}`} className="modal overflow-y-auto">
-            <div className="modal-box w-11/12 max-w-4xl">
-              <form onSubmit={handleUpdate}>
-                <div className="w-full sm:w-10/12 mx-auto my-10 sm:my-16 bg-gray-100 p-6 sm:p-10 lg:p-16 rounded shadow">
-                  <p className="text-2xl sm:text-3xl mb-8 text-center font-bold">
-                    Update Registration Now for the Marathon!
-                  </p>
+        {/* Modal */}
+        <dialog
+          id={`modal_${_id}`}
+          className="modal bg-black bg-opacity-30 backdrop-blur-sm"
+          style={{ border: "none", borderRadius: "10px" }}
+        >
+          <div className="modal-box max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg relative">
+            <form onSubmit={handleUpdate} className="space-y-6">
+              <h3 className="text-2xl font-bold text-center text-indigo-700 mb-6">
+                Update Marathon Registration
+              </h3>
 
-                  <div className="space-y-4">
-                    <input
-                      type="email"
-                      name="email"
-                      defaultValue={user?.email || ""}
-                      readOnly
-                      className="w-full cursor-not-allowed p-2 border border-gray-300 rounded text-gray-500"
-                    />
+              <input
+                type="email"
+                name="email"
+                defaultValue={user?.email || ""}
+                readOnly
+                className="w-full bg-gray-100 text-gray-600 p-3 rounded-md border border-gray-300 cursor-not-allowed"
+              />
 
-                    <input
-                      type="text"
-                      defaultValue={marathonsTitle || ""}
-                      readOnly
-                      className="w-full cursor-not-allowed p-2 border border-gray-300 rounded text-gray-500"
-                    />
+              <input
+                type="text"
+                defaultValue={marathonsTitle || ""}
+                readOnly
+                className="w-full bg-gray-100 text-gray-600 p-3 rounded-md border border-gray-300 cursor-not-allowed"
+              />
 
-                    <input
-                      type="text"
-                      value={format(new Date(marathonDate), "yyyy-MM-dd")}
-                      readOnly
-                      className="w-full cursor-not-allowed p-2 border border-gray-300 rounded text-gray-500"
-                    />
+              <input
+                type="text"
+                value={format(new Date(marathonDate), "yyyy-MM-dd")}
+                readOnly
+                className="w-full bg-gray-100 text-gray-600 p-3 rounded-md border border-gray-300 cursor-not-allowed"
+              />
 
-                    <input
-                      type="text"
-                      name="firstName"
-                      placeholder="First Name"
-                      defaultValue={firstName}
-                      required
-                      className="w-full p-2 border border-gray-300 rounded"
-                    />
+              <input
+                type="text"
+                name="firstName"
+                placeholder="First Name"
+                defaultValue={firstName}
+                required
+                className="w-full p-3 border border-indigo-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              />
 
-                    <input
-                      type="text"
-                      name="lastName"
-                      placeholder="Last Name"
-                      defaultValue={lastName}
-                      required
-                      className="w-full p-2 border border-gray-300 rounded"
-                    />
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                defaultValue={lastName}
+                required
+                className="w-full p-3 border border-indigo-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              />
 
-                    <input
-                      type="tel"
-                      name="contactNumber"
-                      placeholder="Contact Number"
-                      defaultValue={contactNumber}
-                      required
-                      className="w-full p-2 border border-gray-300 rounded"
-                    />
+              <input
+                type="tel"
+                name="contactNumber"
+                placeholder="Contact Number"
+                defaultValue={contactNumber}
+                required
+                className="w-full p-3 border border-indigo-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              />
 
-                    <textarea
-                      name="additionalInfo"
-                      placeholder="Additional Info (Optional)"
-                      defaultValue={additionalInfo}
-                      className="w-full p-2 border border-gray-300 rounded"
-                    ></textarea>
-                  </div>
+              <textarea
+                name="additionalInfo"
+                placeholder="Additional Info (Optional)"
+                defaultValue={additionalInfo}
+                className="w-full p-3 border border-indigo-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 resize-none"
+                rows={4}
+              ></textarea>
 
-                  <div className="modal-action mt-8 text-center">
-                    <button  method="dialog"
-                      type="submit"
-                      className="bg-purple-200 border-2 border-purple-300 hover:bg-white hover:border-purple-300 transition-all duration-300 text-base sm:text-lg px-8 py-2 sm:px-10 sm:py-3 rounded hover:scale-105"
-                    >
-                      Update info
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </dialog>
-        </div>
+              <div className="modal-action flex justify-center mt-4">
+                <button
+                  type="submit"
+                  className="bg-indigo-600 text-white px-8 py-2 rounded-md hover:bg-indigo-700 transition"
+                >
+                  Update Info
+                </button>
+                <button
+                  type="button"
+                  onClick={() => document.getElementById(`modal_${_id}`).close()}
+                  className="ml-4 px-6 py-2 rounded-md border border-gray-300 hover:bg-gray-100 transition"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </dialog>
       </th>
     </tr>
   );

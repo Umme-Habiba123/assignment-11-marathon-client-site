@@ -1,36 +1,64 @@
-import axios from 'axios';
-import React from 'react';
-import useAuth from './useAuth';
+import { useEffect } from "react";
+import axios from "axios";
+import useAuth from "./useAuth";
 
- const axiosInstance=axios.create({
-   baseURL: 'http://localhost:5000'
- })
+const axiosInstance = axios.create({
+  baseURL: "http://localhost:5000",
+});
 
 const useAxiosSecure = () => {
-    const {user,signOutUser} =useAuth()
+  const { user, signOutUser } = useAuth();
 
-    axiosInstance.interceptors.request.use(config=>{
-        config.headers.authorization=`Bearer ${user.accessToken}`
-        return config
-    })
+  console.log(user)
 
-    // response interseptor
-    axiosInstance.interceptors.response.use(response=>{
-      return response
-    },error=>{
-        if(error.status=== 401 || error.status=== 403){
-            console.log('logout the user for 401')
-            signOutUser(()=>{
-                console.log('sign out user for 401 status code')
-            }).catch(error=>{
-                console.log(error)
-            })
+  useEffect(() => {
+    const requestInterceptor = axiosInstance.interceptors.request.use(
+      async (config) => {
+        console.log("Request Headers before:", config.headers);
+        if (user) {
+          let token = "";
+          if (typeof user.getIdToken === "function") {
+            token = await user.getIdToken();
+          } else if (user.accessToken) {
+            token = user.accessToken;
+          }
+          console.log("Token:", token);
+
+          if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+          }
         }
-        console.log('error in interceptors', error)
-        return Promise.reject(error)
-    })
+        console.log("Request Headers after:", config.headers);
+        return config;
+      },
+      (error) => Promise.reject(error)
+    );
 
-    return axiosInstance
+    const responseInterceptor = axiosInstance.interceptors.response.use(
+      (response) => response,
+      async (error) => {
+        if (
+          error.response?.status === 401 ||
+          error.response?.status === 403
+        ) {
+          console.log("Unauthorized! Logging out...");
+          try {
+            await signOutUser();
+          } catch (signOutError) {
+            console.error("Error during signOut:", signOutError);
+          }
+        }
+        return Promise.reject(error);
+      }
+    );
+
+    return () => {
+      axiosInstance.interceptors.request.eject(requestInterceptor);
+      axiosInstance.interceptors.response.eject(responseInterceptor);
+    };
+  }, [user, signOutUser]);
+
+  return axiosInstance;
 };
 
-export default useAxiosSecure; 
+export default useAxiosSecure;

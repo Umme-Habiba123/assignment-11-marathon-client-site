@@ -25,10 +25,18 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password)
     }
 
-    const signInWithGoogle = () => {
-        setLoading(true)
-        return signInWithPopup(auth, googleProvider)
-    }
+    const signInWithGoogle = async () => {
+  setLoading(true);
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    return result;
+  } catch (err) {
+    console.error("Google Sign-In Error:", err);
+    throw err;
+  } finally {
+    setLoading(false);
+  }
+};
 
     // sign out user-----
     const signOutUser = () => {

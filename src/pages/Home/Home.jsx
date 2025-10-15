@@ -5,6 +5,7 @@ import MarathonsNews from './MarathonsNews';
 import UpcomingMarathon from './UpcomingMarathon';
 import HomeCard from './HomeCard';
 import AboutMe from '../../Components/AboutMe';
+import { Helmet } from 'react-helmet';
 
 
 
@@ -19,6 +20,10 @@ const Home = () => {
 
     return (
         <div className=' '>
+            <Helmet>
+                <title>home || raceClock</title>
+                <meta name="description" content="Nested component" />
+            </Helmet>
             <Slider></Slider>
             {/* <MarathonsNews marathonPromise={marathonPromise}></MarathonsNews> */}
 
@@ -31,7 +36,7 @@ const Home = () => {
                 initialRegistered={230}></HomeCard>
 
             <AboutMe></AboutMe>
-          
+
         </div>
     );
 };
