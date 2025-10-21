@@ -17,7 +17,7 @@ const MyMarathonsList = () => {
     },
   });
 
-  if (isLoading) return <p>Loading your marathons...</p>;
+  if (isLoading) return <p>Loading your marathons...</p> ;
 
   return (
     <div className="p-5">
