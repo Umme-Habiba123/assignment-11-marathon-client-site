@@ -1,12 +1,41 @@
-# React + Vite
+# 🏃‍♀️ RaceClock - Marathon Management Platform (Client)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**RaceClock** হলো একটি ফুল-স্ট্যাক ম্যারাথন ম্যানেজমেন্ট ওয়েব অ্যাপ, যেখানে ইউজাররা ম্যারাথনে রেজিস্টার করতে পারে, রেজাল্ট দেখতে পারে, এবং পেমেন্ট সম্পন্ন করতে পারে।  
+এই অংশটি React ভিত্তিক **Client-side** অ্যাপ্লিকেশন।
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- 🔐 Firebase Authentication (Google / Email login)
+- 🏁 Add & Manage Marathons (Admin Panel)
+- 📝 User Registration System
+- 💳 Secure Payment with Stripe
+- 🏅 Leaderboard System (Ranking)
+- 📦 My Apply Page (User’s Registered Marathons)
+- 📊 Dashboard (User & Admin)
+- 📍 Parcel / Tracking System (for delivery events)
+- 🌗 Light & Dark Theme Support
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Technologies Used
+
+- **React + Vite**
+- **Tailwind CSS + DaisyUI**
+- **React Router DOM**
+- **Axios (custom hook with JWT)**
+- **Firebase Authentication**
+- **Stripe Payment Integration**
+- **Framer Motion** (Animations)
+- **React Helmet Async**
+- **SweetAlert2**
+
+---
+
+## ⚙️ Installation Guide
+
+### Step 1: Clone the repository
+```bash
+git clone https://github.com/your-username/marathon-client.git
+cd marathon-client
