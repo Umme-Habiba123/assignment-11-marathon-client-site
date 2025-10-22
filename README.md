@@ -1,41 +1,70 @@
-# 🏃‍♀️ RaceClock - Marathon Management Platform (Client)
+# 🏁 RaceClock Frontend
 
-**RaceClock** হলো একটি ফুল-স্ট্যাক ম্যারাথন ম্যানেজমেন্ট ওয়েব অ্যাপ, যেখানে ইউজাররা ম্যারাথনে রেজিস্টার করতে পারে, রেজাল্ট দেখতে পারে, এবং পেমেন্ট সম্পন্ন করতে পারে।  
-এই অংশটি React ভিত্তিক **Client-side** অ্যাপ্লিকেশন।
-
----
-
-## 🚀 Features
-
-- 🔐 Firebase Authentication (Google / Email login)
-- 🏁 Add & Manage Marathons (Admin Panel)
-- 📝 User Registration System
-- 💳 Secure Payment with Stripe
-- 🏅 Leaderboard System (Ranking)
-- 📦 My Apply Page (User’s Registered Marathons)
-- 📊 Dashboard (User & Admin)
-- 📍 Parcel / Tracking System (for delivery events)
-- 🌗 Light & Dark Theme Support
+**Live Demo:** 
+**Repository (Client):** https://github.com/Umme-Habiba123/assignment-11-marathon-client-site
 
 ---
 
-## 🛠️ Technologies Used
-
-- **React + Vite**
-- **Tailwind CSS + DaisyUI**
-- **React Router DOM**
-- **Axios (custom hook with JWT)**
-- **Firebase Authentication**
-- **Stripe Payment Integration**
-- **Framer Motion** (Animations)
-- **React Helmet Async**
-- **SweetAlert2**
+## 🔍 Project Overview
+**RaceClock** হলো একটি আধুনিক **Marathon Management Platform**, যেখানে ব্যবহারকারীরা বিভিন্ন ম্যারাথন ইভেন্টে রেজিস্টার করতে পারেন, পেমেন্ট সম্পন্ন করতে পারেন, এবং ফলাফল (Leaderboard) দেখতে পারেন।  
+অ্যাডমিনরা নতুন ম্যারাথন যোগ করতে, অংশগ্রহণকারীদের পরিচালনা করতে এবং লিডারবোর্ড আপডেট করতে পারেন।
 
 ---
 
-## ⚙️ Installation Guide
+## 🖼 Screenshot
+![RaceClock Screenshot](https://i.ibb.co.com/hR4w7RGm/Screenshot-2025-10-22-173858.png)
 
-### Step 1: Clone the repository
+---
+
+## 🧰 Technologies Used
+- React + Vite  
+- Tailwind CSS + DaisyUI  
+- React Router DOM  
+- Firebase Authentication  
+- Axios (Custom hook with JWT)  
+- Stripe Payment Integration  
+- React Helmet Async  
+- Framer Motion (for animation)  
+- SweetAlert2  
+
+---
+
+## ✨ Core Features
+- 🏃 User Registration for Marathons  
+- 🗓 Add & Manage Marathon Events (Admin Only)  
+- 💳 Secure Online Payment with Stripe  
+- 🥇 Real-time Leaderboard System  
+- 🧾 My Apply Page (User’s Registered Events)  
+- 📊 Dashboard for User & Admin  
+- 🧑‍🏫 Role-based Access Control  
+- 🌗 Light/Dark Mode Toggle  
+- 🔔 SweetAlert Notification System  
+
+---
+
+## ⚙️ Dependencies
 ```bash
-git clone https://github.com/your-username/marathon-client.git
+npm install react react-dom react-router-dom axios tailwindcss daisyui firebase sweetalert2 framer-motion react-helmet-async @stripe/react-stripe-js @stripe/stripe-js
+
+
+🚀 How to Run the Project Locally-
+🧩 1. Prerequisites
+
+Make sure the following tools are installed on your system:
+
+Node.js (v16 or higher) → Download here
+
+npm (comes with Node) or yarn
+
+Git → Download here
+
+Check if everything is installed:
+node -v
+npm -v
+git --version
+
+git clone https://github.com/Umme-Habiba123/marathon-client.git
 cd marathon-client
+
+npm install
+
