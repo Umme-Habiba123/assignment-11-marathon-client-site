@@ -1,6 +1,7 @@
-# 🏁 RaceClock Frontend
+# 🏁 RaceClock-managment-platform (Frontend)
 
-**Live Demo:** 
+**Live Demo:** [ https://race-clock-marathon-managment-platfor.netlify.app/ ]
+
 **Repository (Client):** https://github.com/Umme-Habiba123/assignment-11-marathon-client-site
 
 ---
